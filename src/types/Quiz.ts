@@ -1,6 +1,8 @@
 export interface IQuiz {
   name: string;
   questions: Questions[];
+  difficult: Difficult;
+  id: string;
 }
 
 interface Questions {
@@ -11,4 +13,10 @@ interface Questions {
 interface Answers {
   text: string;
   isCorrect: boolean;
+}
+
+export enum Difficult {
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
 }
