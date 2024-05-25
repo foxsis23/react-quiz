@@ -15,11 +15,30 @@ export default function Home() {
       difficult: Difficult.EASY,
       questions: [
         {
-          question: 'Test question 1',
+          question: 'Test question 2',
+          correctAnswer: 'Test answer',
           answers: [
-            { text: 'Test answer', isCorrect: false },
-            { text: 'Test answer', isCorrect: false },
-            { text: 'Test answer', isCorrect: true },
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
+          ],
+        },
+        {
+          question: 'Test question 3',
+          correctAnswer: 'Test answer',
+          answers: [
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
+          ],
+        },
+        {
+          question: 'Test question 4',
+          correctAnswer: 'Test answer',
+          answers: [
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
           ],
         },
       ],
@@ -31,26 +50,29 @@ export default function Home() {
       questions: [
         {
           question: 'Test question 2',
+          correctAnswer: 'Test answer',
           answers: [
-            { text: 'Test answer', isCorrect: false },
-            { text: 'Test answer', isCorrect: true },
-            { text: 'Test answer', isCorrect: false },
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
           ],
         },
         {
           question: 'Test question 3',
+          correctAnswer: 'Test answer',
           answers: [
-            { text: 'Test answer', isCorrect: false },
-            { text: 'Test answer', isCorrect: true },
-            { text: 'Test answer', isCorrect: false },
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
           ],
         },
         {
           question: 'Test question 4',
+          correctAnswer: 'Test answer',
           answers: [
-            { text: 'Test answer', isCorrect: false },
-            { text: 'Test answer', isCorrect: true },
-            { text: 'Test answer', isCorrect: false },
+            { text: 'Test answer1' },
+            { text: 'Test answer2' },
+            { text: 'Test answer' },
           ],
         },
       ],

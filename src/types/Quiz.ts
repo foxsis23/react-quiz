@@ -7,12 +7,12 @@ export interface IQuiz {
 
 export interface Questions {
   question: string;
+  correctAnswer: string;
   answers: Answers[];
 }
 
 interface Answers {
   text: string;
-  isCorrect: boolean;
 }
 
 export enum Difficult {
