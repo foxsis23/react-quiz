@@ -5,7 +5,7 @@ export interface IQuiz {
   id: string;
 }
 
-interface Questions {
+export interface Questions {
   question: string;
   answers: Answers[];
 }

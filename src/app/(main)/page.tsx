@@ -8,7 +8,7 @@ import { QuizCard } from '@/components/quiz-card/QuizCard';
 export default function Home() {
   const [quizArr, setQuizArr] = useState<IQuiz[] | null>(null);
 
-  setQuiz<IQuiz[]>('quiz', [
+  setQuiz('quiz', [
     {
       name: 'test quiz',
       id: '1805082e-37b5-4ee0-aa7b-c898ae98c3ac',
@@ -37,10 +37,26 @@ export default function Home() {
             { text: 'Test answer', isCorrect: false },
           ],
         },
+        {
+          question: 'Test question 3',
+          answers: [
+            { text: 'Test answer', isCorrect: false },
+            { text: 'Test answer', isCorrect: true },
+            { text: 'Test answer', isCorrect: false },
+          ],
+        },
+        {
+          question: 'Test question 4',
+          answers: [
+            { text: 'Test answer', isCorrect: false },
+            { text: 'Test answer', isCorrect: true },
+            { text: 'Test answer', isCorrect: false },
+          ],
+        },
       ],
     },
   ])
-    .then(() => getQuiz<IQuiz[]>('quiz'))
+    .then(() => getQuiz('quiz'))
     .then(data => setQuizArr(data));
 
   return (
@@ -48,7 +64,12 @@ export default function Home() {
       <p className="font-bold text-4xl">Choose your quiz</p>
       <div className="flex flex-row gap-[15px] items-center justify-center">
         {quizArr?.map(quiz => (
-          <QuizCard name={quiz.name} difficult={quiz.difficult} key={quiz.id} />
+          <QuizCard
+            name={quiz.name}
+            difficult={quiz.difficult}
+            id={quiz.id}
+            key={quiz.id}
+          />
         ))}
       </div>
     </div>
