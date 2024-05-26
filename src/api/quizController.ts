@@ -19,9 +19,19 @@ export function getQuizById(key: string, id: string): Promise<IQuiz | null> {
   });
 }
 
-export function setQuiz(key: string, value: IQuiz[]): Promise<void> {
+export function editQuiz(key: string, value: IQuiz): Promise<void> {
+  let quizzes: IQuiz[] | null = [];
+  getQuiz('quiz').then(data => {
+    quizzes = data;
+    const quizIndex = quizzes?.findIndex(item => item.id === value.id);
+    if (quizzes !== null) {
+      quizzes[quizIndex as number] = value;
+    }
+    console.log(quizzes);
+  });
+
   return delay(500).then(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(quizzes));
   });
 }
 
@@ -36,9 +46,11 @@ export function addQuiz(key: string, value: IQuiz): Promise<void> {
 
 export function removeQuiz(key: string, id: string): Promise<void> {
   let quizzes: IQuiz[] | null = [];
-  getQuiz('quiz').then(
-    data => (quizzes = data?.filter(item => item.id !== id)),
-  );
+  getQuiz('quiz').then(data => {
+    if (data !== null) {
+      quizzes = data.filter(item => item.id !== id);
+    }
+  });
 
   return delay(500).then(() => {
     localStorage.setItem(key, JSON.stringify(quizzes));
