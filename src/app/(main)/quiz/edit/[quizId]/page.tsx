@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Answers, Difficult, IQuiz, Questions } from '@/types/Quiz';
-import { v4 as uuidv4 } from 'uuid';
-import { addQuiz, editQuiz, getQuiz, getQuizById } from '@/api/quizController';
+import { editQuiz, getQuizById } from '@/api/quizController';
 import Loading from '@/components/loading/Loading';
 
 const QuizEdit = () => {
@@ -12,7 +11,7 @@ const QuizEdit = () => {
   const params = useParams<{ quizId: string }>();
 
   const [quizName, setQuizName] = useState('');
-  const [difficult, setDifficulty] = useState<string>('EASY');
+  const [difficult, setDifficulty] = useState<Difficult>(Difficult.EASY);
   const [questions, setQuestions] = useState<Questions[]>([]);
 
   const [currentQuestion, setCurrentQuestion] = useState('');
@@ -106,7 +105,7 @@ const QuizEdit = () => {
             <select
               className="bg-gray-100 rounded-md p-1 text-black"
               value={difficult}
-              onChange={e => setDifficulty(e.target.value)}
+              onChange={e => setDifficulty(e.target.value as Difficult)}
             >
               <option value={Difficult.EASY}>{Difficult.EASY}</option>
               <option value={Difficult.MEDIUM}>{Difficult.MEDIUM}</option>

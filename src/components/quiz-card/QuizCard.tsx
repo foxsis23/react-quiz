@@ -13,7 +13,7 @@ interface QuizCardProps {
 export const QuizCard = ({ name, difficult, id }: QuizCardProps) => {
   const router = useRouter();
   return (
-    <div className="bg-gray-100 p-[10px] rounded-md color-white flex flex-col gap-[10px] shadow-md w-[150px] relative">
+    <div className="bg-gray-100 p-[10px] rounded-md color-white flex flex-col gap-[10px] shadow-md w-[160px]">
       <p className="font-bold text-xl">{name}</p>
       <p>
         Difficult:{' '}

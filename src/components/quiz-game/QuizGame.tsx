@@ -22,11 +22,11 @@ const QuizGame = () => {
   const [endedQuiz, setEndedQuiz] = useState<boolean>(false);
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < quiz?.questions.length - 1) {
+    if (currentQuestionIndex < (quiz?.questions.length as number) - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setLock(false);
     }
-    if (currentQuestionIndex == quiz?.questions.length - 1) {
+    if (currentQuestionIndex == (quiz?.questions.length as number) - 1) {
       setEndedQuiz(true);
     }
   };

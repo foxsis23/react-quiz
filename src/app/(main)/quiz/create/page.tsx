@@ -10,7 +10,7 @@ const CreateQuiz = () => {
   const { push } = useRouter();
 
   const [quizName, setQuizName] = useState('');
-  const [difficult, setDifficulty] = useState<string>('EASY');
+  const [difficult, setDifficulty] = useState<Difficult>(Difficult.EASY);
   const [questions, setQuestions] = useState<Questions[]>([]);
 
   const [currentQuestion, setCurrentQuestion] = useState('');
@@ -90,7 +90,7 @@ const CreateQuiz = () => {
             <select
               className="bg-gray-100 rounded-md p-1 text-black"
               value={difficult}
-              onChange={e => setDifficulty(e.target.value)}
+              onChange={e => setDifficulty(e.target.value as Difficult)}
             >
               <option value={Difficult.EASY}>{Difficult.EASY}</option>
               <option value={Difficult.MEDIUM}>{Difficult.MEDIUM}</option>

@@ -105,7 +105,7 @@ export default function Home() {
       >
         Add new quiz
       </button>
-      <div className="flex flex-row gap-[20px] items-center justify-center mt-5 max-w-[500px] flex-wrap">
+      <div className="flex flex-row gap-[20px] items-center justify-center mt-5 max-w-[600px] flex-wrap">
         {!quizArr ? (
           <Loading />
         ) : (
