@@ -34,8 +34,13 @@ export function addQuiz(key: string, value: IQuiz): Promise<void> {
   });
 }
 
-export function removeQuiz(key: string): Promise<void> {
+export function removeQuiz(key: string, id: string): Promise<void> {
+  let quizzes: IQuiz[] | null = [];
+  getQuiz('quiz').then(
+    data => (quizzes = data?.filter(item => item.id !== id)),
+  );
+
   return delay(500).then(() => {
-    localStorage.removeItem(key);
+    localStorage.setItem(key, JSON.stringify(quizzes));
   });
 }
