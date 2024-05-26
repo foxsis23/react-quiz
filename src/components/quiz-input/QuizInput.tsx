@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useScore } from '@/contexts/QuizContext';
 
 interface QuizInputProps {
   text: string;
@@ -12,14 +11,14 @@ interface QuizInputProps {
 
 const QuizInput = ({ text, correctAnswer, setLock, lock }: QuizInputProps) => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const { state, dispatch } = useScore();
+  const [score, setScore] = useState(0);
 
   const handleAnswer = () => {
     if (!lock) {
       if (text === correctAnswer) {
         setIsCorrect(true);
         setLock(true);
-        dispatch({ type: 'increment' });
+        localStorage.setItem('score', JSON.stringify(score + 1));
       } else {
         setIsCorrect(false);
         setLock(true);
@@ -31,6 +30,7 @@ const QuizInput = ({ text, correctAnswer, setLock, lock }: QuizInputProps) => {
     if (!lock) {
       setIsCorrect(null);
     }
+    setScore(Number(localStorage.getItem('score')));
   }, [lock]);
 
   return (

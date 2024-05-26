@@ -2,15 +2,17 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 interface ScoreState {
   score: number;
+  time: number;
 }
 
 interface ScoreAction {
-  type: 'increment' | 'reset';
+  type: 'increment' | 'reset' | 'setTime';
   payload?: number;
 }
 
 const initialState: ScoreState = {
   score: 0,
+  time: 0,
 };
 
 const ScoreContext = createContext<{
@@ -27,6 +29,8 @@ const scoreReducer = (state: ScoreState, action: ScoreAction): ScoreState => {
       return { ...state, score: state.score + 1 };
     case 'reset':
       return { ...state, score: 0 };
+    case 'setTime':
+      return { ...state, time: action.payload ?? state.time };
     default:
       return state;
   }
@@ -44,4 +48,4 @@ export const ScoreProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-export const useScore = () => useContext(ScoreContext);
+export const useQuiz = () => useContext(ScoreContext);

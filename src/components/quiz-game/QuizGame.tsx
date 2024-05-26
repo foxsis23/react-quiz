@@ -4,16 +4,18 @@ import React, { useEffect, useState } from 'react';
 import { getQuizById } from '@/api/quizController';
 import { IQuiz } from '@/types/Quiz';
 import QuizInput from '@/components/quiz-input/QuizInput';
-import { ScoreProvider, useScore } from '@/contexts/QuizContext';
 import { useParams, useRouter } from 'next/navigation';
 import Loading from '@/components/loading/Loading';
+import Timer from '@/components/timer/Timer';
 
 const QuizGame = () => {
   const params = useParams<{ quizId: string }>();
   const router = useRouter();
 
   const [quiz, setQuiz] = useState<IQuiz | null>(null);
-  const { state } = useScore();
+
+  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(0);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
 
@@ -33,19 +35,26 @@ const QuizGame = () => {
 
   useEffect(() => {
     getQuizById('quiz', params.quizId).then(data => setQuiz(data));
-  }, []);
+    setScore(Number(localStorage.getItem('score')));
+    setTime(Number(localStorage.getItem('time')));
+  }, [localStorage.getItem('score'), localStorage.getItem('time')]);
 
   if (endedQuiz) {
     return (
       <>
         <p className="text-center mt-[60px] text-2xl">
           <span className="font-bold">
-            {state.score >= 3 ? 'Congratulations!' : 'Try again!'}
+            {score >= 3 ? 'Congratulations!' : 'Try again!'}
           </span>{' '}
-          Your score: {state.score}
+          Your score: {score}
         </p>
+        <p>Your time: {time}s</p>
         <button
-          onClick={() => router.push('/')}
+          onClick={() => {
+            router.push('/');
+            localStorage.setItem('score', JSON.stringify(0));
+            localStorage.setItem('time', JSON.stringify(0));
+          }}
           className="rounded-md bg-green-400 text-white p-2 mt-4 hover:bg-green-500"
         >
           Back to quizzes
@@ -78,12 +87,19 @@ const QuizGame = () => {
           />
         ))}
       </div>
-      <button
-        onClick={handleNextQuestion}
-        className="rounded-md bg-green-400 text-white px-4 py-2 hover:bg-green-500"
-      >
-        {currentQuestionIndex == quiz?.questions.length - 1 ? 'End' : 'Next'}
-      </button>
+      <div className="flex justify-between w-full items-center">
+        <button
+          onClick={handleNextQuestion}
+          className="rounded-md bg-green-400 text-white px-4 py-2 hover:bg-green-500"
+        >
+          {currentQuestionIndex == quiz?.questions.length - 1 ? 'End' : 'Next'}
+        </button>
+        <Timer
+          initialSeconds={600}
+          onTimeUp={() => alert('Time is out')}
+          isEnded={endedQuiz}
+        />
+      </div>
     </div>
   );
 };
