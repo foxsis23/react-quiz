@@ -11,7 +11,7 @@ export interface Questions {
   answers: Answers[];
 }
 
-interface Answers {
+export interface Answers {
   text: string;
 }
 

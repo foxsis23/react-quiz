@@ -6,6 +6,7 @@ import { IQuiz } from '@/types/Quiz';
 import QuizInput from '@/components/quiz-input/QuizInput';
 import { ScoreProvider, useScore } from '@/contexts/QuizContext';
 import { useParams, useRouter } from 'next/navigation';
+import Loading from '@/components/loading/Loading';
 
 const QuizGame = () => {
   const params = useParams<{ quizId: string }>();
@@ -37,13 +38,24 @@ const QuizGame = () => {
   if (endedQuiz) {
     return (
       <>
-        <p>
-          {state.score >= 3 ? 'Congratulations!' : 'Try again!'} Your score:{' '}
-          {state.score}
+        <p className="text-center mt-[60px] text-2xl">
+          <span className="font-bold">
+            {state.score >= 3 ? 'Congratulations!' : 'Try again!'}
+          </span>{' '}
+          Your score: {state.score}
         </p>
-        <button onClick={() => router.push('/')}>Back to quizzes</button>
+        <button
+          onClick={() => router.push('/')}
+          className="rounded-md bg-green-400 text-white p-2 mt-4 hover:bg-green-500"
+        >
+          Back to quizzes
+        </button>
       </>
     );
+  }
+
+  if (!quiz) {
+    return <Loading />;
   }
 
   return (
@@ -66,7 +78,10 @@ const QuizGame = () => {
           />
         ))}
       </div>
-      <button onClick={handleNextQuestion}>
+      <button
+        onClick={handleNextQuestion}
+        className="rounded-md bg-green-400 text-white px-4 py-2 hover:bg-green-500"
+      >
         {currentQuestionIndex == quiz?.questions.length - 1 ? 'End' : 'Next'}
       </button>
     </div>

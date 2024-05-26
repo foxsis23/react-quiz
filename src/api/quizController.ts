@@ -25,6 +25,15 @@ export function setQuiz(key: string, value: IQuiz[]): Promise<void> {
   });
 }
 
+export function addQuiz(key: string, value: IQuiz): Promise<void> {
+  let quizzes: IQuiz[] | null = [];
+  getQuiz('quiz').then(data => (quizzes = [...(data as IQuiz[]), value]));
+
+  return delay(500).then(() => {
+    localStorage.setItem(key, JSON.stringify(quizzes));
+  });
+}
+
 export function removeQuiz(key: string): Promise<void> {
   return delay(500).then(() => {
     localStorage.removeItem(key);
